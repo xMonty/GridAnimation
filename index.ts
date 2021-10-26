@@ -8,7 +8,7 @@ import { Grid, Position } from "./constants";
 class Main {
   actorsFile = "actors_input.txt";
   grid = new Grid(10, 10);
-  frames = 10;
+  frames = 3;
   actors: BaseActor[] = [];
 
   loadActors(filename: string): BaseActor[] {

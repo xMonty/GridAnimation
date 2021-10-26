@@ -31,7 +31,6 @@ export class BaseActor {
         this.direction = 0;
       }
     }
-    console.log(`Turned: ${directonToString(this.direction)}`);
   }
 
   stepUp() {
