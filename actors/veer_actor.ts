@@ -7,11 +7,10 @@ export class VeerActor extends BaseActor {
 
   constructor(
     veerDirection: VeerDirection,
-    grid: Grid,
     position: Position,
     direction: Direction
   ) {
-    super(grid, position, direction);
+    super(position, direction);
     this.veerDirection = veerDirection;
     this.name = veerDirection === VeerDirection.anticlockwise ? "VL" : "VR";
   }
@@ -19,17 +18,13 @@ export class VeerActor extends BaseActor {
   nextTurn = 0;
   turnCount = 1;
 
-  move(frame: number) {
-    if (frame === 0) {
-      this.nextTurn++;
-      return;
-    }
+  move(frame: number, grid: Grid) {
     if (this.nextTurn === frame) {
       super.turn(this.veerDirection);
       this.turnCount++;
       this.nextTurn += this.turnCount;
     }
-    super.move(frame);
+    super.move(frame, grid);
   }
 
   toString() {

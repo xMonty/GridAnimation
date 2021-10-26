@@ -2,11 +2,11 @@ import { Direction, Grid, Position } from "./../constants";
 import { BaseActor } from "./base_actor";
 
 export class LineActor extends BaseActor {
-  constructor(grid: Grid, position: Position, direction: Direction) {
-    super(grid, position, direction);
+  constructor(position: Position, direction: Direction) {
+    super(position, direction);
   }
-  move(frame: number) {
-    super.move(frame);
+  move(frame: number, grid: Grid) {
+    super.move(frame, grid);
   }
 
   toString() {

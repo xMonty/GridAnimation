@@ -4,73 +4,40 @@ import { LineActor } from "./actors/line_actor";
 import { RandomActor } from "./actors/random_actor";
 import { StillActor } from "./actors/still_actor";
 import { VeerActor } from "./actors/veer_actor";
+import { ActorsLoader } from "./actors_loader";
 import { Grid, Position } from "./constants";
-class Main {
+
+class Canvas2d {
   actorsFile = "actors_input.txt";
   grid = new Grid(10, 10);
   frames = 3;
+  actorsLoader = new ActorsLoader();
   actors: BaseActor[] = [];
 
-  loadActors(filename: string): BaseActor[] {
-    var lines = fs.readFileSync(filename, "utf-8").split("\n").filter(Boolean);
-    return lines.map((e) => this.actorfromString(e));
+  setup() {
+    this.actors = this.actorsLoader.loadActors(this.actorsFile);
   }
 
-  actorfromString(line: string) {
-    var components = line.split(",");
-    var actor: BaseActor;
-
-    switch (components[0]) {
-      case "L":
-        actor = new LineActor(
-          this.grid,
-          new Position(parseInt(components[1]), parseInt(components[2])),
-          parseInt(components[3])
-        );
-        break;
-      case "S":
-        actor = new StillActor(
-          this.grid,
-          new Position(parseInt(components[1]), parseInt(components[2]))
-        );
-        break;
-      case "R":
-        actor = new RandomActor(this.grid);
-        break;
-      case "VL":
-        actor = new VeerActor(
-          VeerDirection.anticlockwise,
-          this.grid,
-          new Position(parseInt(components[1]), parseInt(components[2])),
-          parseInt(components[3])
-        );
-        break;
-      case "VR":
-        actor = new VeerActor(
-          VeerDirection.clockwise,
-          this.grid,
-          new Position(parseInt(components[1]), parseInt(components[2])),
-          parseInt(components[3])
-        );
-        break;
-      default:
-        actor = new RandomActor(this.grid);
-    }
-    return actor;
+  renderFrame(frame: number) {
+    this.actors.forEach((e) => {
+      //This is just match the example output
+      //Somehow the random actor doesnt show up
+      //in first frame in example output
+      let str = e.toString();
+      if (str.length > 0) {
+        console.log(str);
+      }
+      e.move(frame, this.grid);
+    });
   }
 
   start() {
-    this.actors = this.loadActors(this.actorsFile);
-
     for (let frame = 0; frame < this.frames; frame++) {
-      //move every actor
-      this.actors.forEach((e) => {
-        e.move(frame);
-        console.log(e.toString());
-      });
+      this.renderFrame(frame);
     }
   }
 }
 
-const main = new Main();
-main.start();
+const canvas2d = new Canvas2d();
+canvas2d.setup();
+canvas2d.start();

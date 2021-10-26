@@ -4,26 +4,22 @@ import { getRandomInt } from "./../utils";
 import { BaseActor } from "./base_actor";
 
 export class RandomActor extends BaseActor {
-  constructor(grid: Grid) {
-    super(
-      grid,
-      new Position(getRandomInt(0, grid.rows), getRandomInt(0, grid.columns)),
-      0
-    );
+  constructor() {
+    super(new Position(-1, -1), 0);
   }
 
-  move(frame: number) {
-    if (frame === 0) {
-      return;
-    }
+  move(frame: number, grid: Grid) {
     this.position = new Position(
-      getRandomInt(0, this.grid.rows),
-      getRandomInt(0, this.grid.columns)
+      getRandomInt(0, grid.rows),
+      getRandomInt(0, grid.columns)
     );
     this.frame = frame;
   }
 
   toString() {
+    if (this.position.col < 0 && this.position.row < 0) {
+      return "";
+    }
     return `${this.frame},R,${this.position.row},${this.position.col}`;
   }
 }

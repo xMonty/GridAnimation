@@ -6,15 +6,13 @@ export enum VeerDirection {
 }
 
 export class BaseActor {
-  grid: Grid;
   position: Position;
   direction: Direction;
   frame = 0;
 
-  constructor(grid: Grid, position: Position, direction: Direction) {
+  constructor(position: Position, direction: Direction) {
     this.position = position;
     this.direction = direction;
-    this.grid = grid;
   }
 
   turn(veerDirection: VeerDirection) {
@@ -39,14 +37,14 @@ export class BaseActor {
     }
   }
 
-  stepRight() {
-    if (this.position.col < this.grid.columns - 1) {
+  stepRight(grid: Grid) {
+    if (this.position.col < grid.columns - 1) {
       this.position.col++;
     }
   }
 
-  stepDown() {
-    if (this.position.row < this.grid.rows - 1) {
+  stepDown(grid: Grid) {
+    if (this.position.row < grid.rows - 1) {
       this.position.row++;
     }
   }
@@ -57,31 +55,28 @@ export class BaseActor {
     }
   }
 
-  move(frame: number) {
-    if (frame === 0) {
-      return;
-    }
+  move(frame: number, grid: Grid) {
     switch (this.direction) {
       case Direction.up:
         this.stepUp();
         break;
       case Direction.upRight:
         this.stepUp();
-        this.stepRight();
+        this.stepRight(grid);
         break;
       case Direction.right:
-        this.stepRight();
+        this.stepRight(grid);
         break;
       case Direction.downRight:
-        this.stepDown();
-        this.stepRight();
+        this.stepDown(grid);
+        this.stepRight(grid);
         break;
       case Direction.down:
-        this.stepDown();
+        this.stepDown(grid);
         break;
       case Direction.downLeft:
         this.stepLeft();
-        this.stepDown();
+        this.stepDown(grid);
         break;
       case Direction.left:
         this.stepLeft();
