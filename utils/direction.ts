@@ -1,12 +1,3 @@
-export class Position {
-  row: number;
-  col: number;
-  constructor(row: number, col: number) {
-    this.row = row;
-    this.col = col;
-  }
-}
-
 export enum Direction {
   up = 0,
   upRight = 1,
@@ -36,14 +27,5 @@ export function directonToString(direction: Direction) {
       return "left";
     case Direction.leftUp:
       return "leftUp";
-  }
-}
-
-export class Grid {
-  rows: number;
-  columns: number;
-  constructor(rows: number, columns: number) {
-    this.rows = rows;
-    this.columns = columns;
   }
 }

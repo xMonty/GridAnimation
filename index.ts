@@ -1,11 +1,6 @@
-import fs from "fs";
-import { BaseActor, VeerDirection } from "./actors/base_actor";
-import { LineActor } from "./actors/line_actor";
-import { RandomActor } from "./actors/random_actor";
-import { StillActor } from "./actors/still_actor";
-import { VeerActor } from "./actors/veer_actor";
-import { ActorsLoader } from "./actors_loader";
-import { Grid, Position } from "./constants";
+import { BaseActor } from "./actors/base_actor";
+import { ActorsLoader } from "./utils/actors_loader";
+import { Grid } from "./utils/grid";
 
 class Canvas2d {
   actorsFile = "actors_input.txt";

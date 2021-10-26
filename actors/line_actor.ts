@@ -1,4 +1,6 @@
-import { Direction, Grid, Position } from "./../constants";
+import { Direction } from "../utils/direction";
+import { Grid } from "../utils/grid";
+import { Position } from "../utils/position";
 import { BaseActor } from "./base_actor";
 
 export class LineActor extends BaseActor {

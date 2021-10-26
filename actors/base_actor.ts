@@ -1,4 +1,6 @@
-import { Direction, directonToString, Grid, Position } from "./../constants";
+import { Direction } from "../utils/direction";
+import { Grid } from "../utils/grid";
+import { Position } from "../utils/position";
 
 export enum VeerDirection {
   clockwise = 0,

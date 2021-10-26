@@ -1,6 +1,6 @@
-import { Direction } from "readline";
-import { Grid, Position } from "./../constants";
-import { getRandomInt } from "./../utils";
+import { Grid } from "../utils/grid";
+import { Position } from "../utils/position";
+import { getRandomInt } from "../utils/utils";
 import { BaseActor } from "./base_actor";
 
 export class RandomActor extends BaseActor {
@@ -17,6 +17,8 @@ export class RandomActor extends BaseActor {
   }
 
   toString() {
+    //This is to match the example output
+    //where R doesnt come up in 0th frame
     if (this.position.col < 0 && this.position.row < 0) {
       return "";
     }

@@ -1,5 +1,4 @@
-import { Direction } from "readline";
-import { Grid, Position } from "../constants";
+import { Position } from "../utils/position";
 import { BaseActor } from "./base_actor";
 
 export class StillActor extends BaseActor {

@@ -1,10 +1,10 @@
-import { BaseActor, VeerDirection } from "./actors/base_actor";
-import { LineActor } from "./actors/line_actor";
-import { RandomActor } from "./actors/random_actor";
-import { StillActor } from "./actors/still_actor";
-import { VeerActor } from "./actors/veer_actor";
-import { Position } from "./constants";
+import { BaseActor, VeerDirection } from "../actors/base_actor";
+import { LineActor } from "../actors/line_actor";
+import { RandomActor } from "../actors/random_actor";
+import { StillActor } from "../actors/still_actor";
+import { VeerActor } from "../actors/veer_actor";
 import fs from "fs";
+import { Position } from "./position";
 
 export class ActorsLoader {
   loadActors(filename: string): BaseActor[] {
