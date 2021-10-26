@@ -1,13 +1,14 @@
 import fs from "fs";
-import { BaseActor } from "./actors/base_actor";
+import { BaseActor, VeerDirection } from "./actors/base_actor";
 import { LineActor } from "./actors/line_actor";
 import { RandomActor } from "./actors/random_actor";
 import { StillActor } from "./actors/still_actor";
+import { VeerActor } from "./actors/veer_actor";
 import { Grid, Position } from "./constants";
 class Main {
   actorsFile = "actors_input.txt";
   grid = new Grid(10, 10);
-  frames = 3;
+  frames = 10;
   actors: BaseActor[] = [];
 
   loadActors(filename: string): BaseActor[] {
@@ -37,10 +38,20 @@ class Main {
         actor = new RandomActor(this.grid);
         break;
       case "VL":
-        actor = new RandomActor(this.grid);
+        actor = new VeerActor(
+          VeerDirection.anticlockwise,
+          this.grid,
+          new Position(parseInt(components[1]), parseInt(components[2])),
+          parseInt(components[3])
+        );
         break;
       case "VR":
-        actor = new RandomActor(this.grid);
+        actor = new VeerActor(
+          VeerDirection.clockwise,
+          this.grid,
+          new Position(parseInt(components[1]), parseInt(components[2])),
+          parseInt(components[3])
+        );
         break;
       default:
         actor = new RandomActor(this.grid);
@@ -50,9 +61,13 @@ class Main {
 
   start() {
     this.actors = this.loadActors(this.actorsFile);
+
     for (let frame = 0; frame < this.frames; frame++) {
       //move every actor
-      this.actors.forEach((e) => console.log(e.move(frame)));
+      this.actors.forEach((e) => {
+        e.move(frame);
+        console.log(e.toString());
+      });
     }
   }
 }

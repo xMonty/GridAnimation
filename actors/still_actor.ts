@@ -7,6 +7,13 @@ export class StillActor extends BaseActor {
     super(grid, position, 0);
   }
   move(frame: number) {
-    return `${frame},S,${this.position.row},${this.position.col}`;
+    if (frame === 0) {
+      return;
+    }
+    this.frame = frame;
+  }
+
+  toString() {
+    return `${this.frame},S,${this.position.row},${this.position.col}`;
   }
 }

@@ -13,10 +13,17 @@ export class RandomActor extends BaseActor {
   }
 
   move(frame: number) {
+    if (frame === 0) {
+      return;
+    }
     this.position = new Position(
       getRandomInt(0, this.grid.rows),
       getRandomInt(0, this.grid.columns)
     );
-    return `${frame},R,${this.position.row},${this.position.col}`;
+    this.frame = frame;
+  }
+
+  toString() {
+    return `${this.frame},R,${this.position.row},${this.position.col}`;
   }
 }

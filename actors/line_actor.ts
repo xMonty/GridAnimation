@@ -7,6 +7,9 @@ export class LineActor extends BaseActor {
   }
   move(frame: number) {
     super.move(frame);
-    return `${frame},L,${this.position.row},${this.position.col}`;
+  }
+
+  toString() {
+    return `${this.frame},L,${this.position.row},${this.position.col}`;
   }
 }

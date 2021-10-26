@@ -1,9 +1,15 @@
-import { Direction, Grid, Position } from "./../constants";
+import { Direction, directonToString, Grid, Position } from "./../constants";
+
+export enum VeerDirection {
+  clockwise = 0,
+  anticlockwise = 1,
+}
 
 export class BaseActor {
   grid: Grid;
   position: Position;
   direction: Direction;
+  frame = 0;
 
   constructor(grid: Grid, position: Position, direction: Direction) {
     this.position = position;
@@ -11,16 +17,24 @@ export class BaseActor {
     this.grid = grid;
   }
 
-  stepUp() {
-    if (this.position.col < this.grid.columns - 1) {
-      this.position.col++;
+  turn(veerDirection: VeerDirection) {
+    if (veerDirection === VeerDirection.anticlockwise) {
+      if (this.direction > 0) {
+        this.direction--;
+      } else {
+        this.direction = 7;
+      }
+    } else if (veerDirection == VeerDirection.clockwise) {
+      if (this.direction < 7) {
+        this.direction++;
+      } else {
+        this.direction = 0;
+      }
     }
+    console.log(`Turned: ${directonToString(this.direction)}`);
   }
 
-  stepUpRight() {
-    if (this.position.col < this.grid.columns - 1) {
-      this.position.col++;
-    }
+  stepUp() {
     if (this.position.row > 0) {
       this.position.row--;
     }
@@ -32,28 +46,9 @@ export class BaseActor {
     }
   }
 
-  stepDownRight() {
-    if (this.position.col < this.grid.columns - 1) {
-      this.position.col++;
-    }
-    if (this.position.row < this.grid.rows - 1) {
-      this.position.row++;
-    }
-    console.log(this.position);
-  }
-
   stepDown() {
     if (this.position.row < this.grid.rows - 1) {
       this.position.row++;
-    }
-  }
-
-  stepDownLeft() {
-    if (this.position.row < this.grid.rows - 1) {
-      this.position.row++;
-    }
-    if (this.position.col > 0) {
-      this.position.col--;
     }
   }
 
@@ -63,49 +58,44 @@ export class BaseActor {
     }
   }
 
-  stepLeftUp() {
-    if (this.position.col > 0) {
-      this.position.col--;
-    }
-    if (this.position.row > 0) {
-      this.position.row--;
-    }
-  }
-
   move(frame: number) {
+    if (frame === 0) {
+      return;
+    }
     switch (this.direction) {
       case Direction.up:
-        console.log("Up");
         this.stepUp();
         break;
       case Direction.upRight:
-        console.log("upRight");
-        this.stepUpRight();
+        this.stepUp();
+        this.stepRight();
         break;
       case Direction.right:
-        console.log("right");
         this.stepRight();
         break;
       case Direction.downRight:
-        console.log("downRight");
-        this.stepDownRight();
+        this.stepDown();
+        this.stepRight();
         break;
       case Direction.down:
-        console.log("down");
         this.stepDown();
         break;
       case Direction.downLeft:
-        console.log("downLeft");
-        this.stepDownLeft();
+        this.stepLeft();
+        this.stepDown();
         break;
       case Direction.left:
-        console.log("left");
         this.stepLeft();
         break;
       case Direction.leftUp:
-        console.log("leftUp");
-        this.stepLeftUp();
+        this.stepLeft();
+        this.stepUp();
         break;
     }
+    this.frame = frame;
+  }
+
+  toString() {
+    return "NOT_IMPL";
   }
 }
