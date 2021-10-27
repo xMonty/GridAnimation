@@ -1,7 +1,7 @@
 import { Grid } from "../utils/grid";
 import { Position } from "../utils/position";
 import { getRandomInt } from "../utils/utils";
-import { BaseActor } from "./base_actor";
+import { ActorTypeSymbols, BaseActor } from "./base_actor";
 
 export class RandomActor extends BaseActor {
   constructor() {
@@ -9,11 +9,11 @@ export class RandomActor extends BaseActor {
   }
 
   move(frame: number, grid: Grid) {
+    this.frame = frame;
     this.position = new Position(
       getRandomInt(0, grid.rows),
       getRandomInt(0, grid.columns)
     );
-    this.frame = frame;
   }
 
   toString() {
@@ -22,6 +22,6 @@ export class RandomActor extends BaseActor {
     if (this.position.col < 0 && this.position.row < 0) {
       return "";
     }
-    return `${this.frame},R,${this.position.row},${this.position.col}`;
+    return `${this.frame},${ActorTypeSymbols.randomActor},${this.position.row},${this.position.col}`;
   }
 }

@@ -7,6 +7,14 @@ export enum VeerDirection {
   anticlockwise = 1,
 }
 
+export enum ActorTypeSymbols {
+  lineActor = "L",
+  randomActor = "R",
+  stillActor = "S",
+  veerLeftActor = "VL",
+  veerRightActor = "VR",
+}
+
 export class BaseActor {
   position: Position;
   direction: Direction;
@@ -58,6 +66,7 @@ export class BaseActor {
   }
 
   move(frame: number, grid: Grid) {
+    this.frame = frame;
     switch (this.direction) {
       case Direction.up:
         this.stepUp();
@@ -88,7 +97,6 @@ export class BaseActor {
         this.stepUp();
         break;
     }
-    this.frame = frame;
   }
 
   toString() {

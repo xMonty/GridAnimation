@@ -1,7 +1,7 @@
 import { Direction } from "../utils/direction";
 import { Grid } from "../utils/grid";
 import { Position } from "../utils/position";
-import { BaseActor } from "./base_actor";
+import { ActorTypeSymbols, BaseActor } from "./base_actor";
 
 export class LineActor extends BaseActor {
   constructor(position: Position, direction: Direction) {
@@ -12,6 +12,6 @@ export class LineActor extends BaseActor {
   }
 
   toString() {
-    return `${this.frame},L,${this.position.row},${this.position.col}`;
+    return `${this.frame},${ActorTypeSymbols.lineActor},${this.position.row},${this.position.col}`;
   }
 }

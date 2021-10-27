@@ -14,6 +14,7 @@ class Canvas2d {
   }
 
   renderFrame(frame: number) {
+    console.log(`drawing frame ${frame}`);
     this.actors.forEach((e) => {
       //This is just match the example output
       //Somehow the random actor doesnt show up
@@ -27,7 +28,7 @@ class Canvas2d {
   }
 
   start() {
-    for (let frame = 0; frame < this.frames; frame++) {
+    for (let frame = 1; frame < this.frames + 1; frame++) {
       this.renderFrame(frame);
     }
   }

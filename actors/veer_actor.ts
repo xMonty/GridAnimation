@@ -1,11 +1,11 @@
 import { Direction } from "../utils/direction";
 import { Grid } from "../utils/grid";
 import { Position } from "../utils/position";
-import { BaseActor, VeerDirection } from "./base_actor";
+import { ActorTypeSymbols, BaseActor, VeerDirection } from "./base_actor";
 
 export class VeerActor extends BaseActor {
   veerDirection: VeerDirection;
-  name: string;
+  type: ActorTypeSymbols;
 
   constructor(
     veerDirection: VeerDirection,
@@ -14,7 +14,10 @@ export class VeerActor extends BaseActor {
   ) {
     super(position, direction);
     this.veerDirection = veerDirection;
-    this.name = veerDirection === VeerDirection.anticlockwise ? "VL" : "VR";
+    this.type =
+      veerDirection === VeerDirection.anticlockwise
+        ? ActorTypeSymbols.veerLeftActor
+        : ActorTypeSymbols.veerRightActor;
   }
 
   nextTurn = 0;
@@ -30,6 +33,6 @@ export class VeerActor extends BaseActor {
   }
 
   toString() {
-    return `${this.frame},${this.name},${this.position.row},${this.position.col}`;
+    return `${this.frame},${this.type},${this.position.row},${this.position.col}`;
   }
 }

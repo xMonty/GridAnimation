@@ -1,5 +1,5 @@
 import { Position } from "../utils/position";
-import { BaseActor } from "./base_actor";
+import { ActorTypeSymbols, BaseActor } from "./base_actor";
 
 export class StillActor extends BaseActor {
   constructor(position: Position) {
@@ -10,6 +10,6 @@ export class StillActor extends BaseActor {
   }
 
   toString() {
-    return `${this.frame},S,${this.position.row},${this.position.col}`;
+    return `${this.frame},${ActorTypeSymbols.stillActor},${this.position.row},${this.position.col}`;
   }
 }

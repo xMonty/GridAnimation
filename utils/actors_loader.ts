@@ -1,4 +1,8 @@
-import { BaseActor, VeerDirection } from "../actors/base_actor";
+import {
+  ActorTypeSymbols,
+  BaseActor,
+  VeerDirection,
+} from "../actors/base_actor";
 import { LineActor } from "../actors/line_actor";
 import { RandomActor } from "../actors/random_actor";
 import { StillActor } from "../actors/still_actor";
@@ -17,28 +21,28 @@ export class ActorsLoader {
     var actor: BaseActor;
 
     switch (components[0].trim()) {
-      case "L":
+      case ActorTypeSymbols.lineActor:
         actor = new LineActor(
           new Position(parseInt(components[1]), parseInt(components[2])),
           parseInt(components[3])
         );
         break;
-      case "S":
+      case ActorTypeSymbols.stillActor:
         actor = new StillActor(
           new Position(parseInt(components[1]), parseInt(components[2]))
         );
         break;
-      case "R":
+      case ActorTypeSymbols.randomActor:
         actor = new RandomActor();
         break;
-      case "VL":
+      case ActorTypeSymbols.veerLeftActor:
         actor = new VeerActor(
           VeerDirection.anticlockwise,
           new Position(parseInt(components[1]), parseInt(components[2])),
           parseInt(components[3])
         );
         break;
-      case "VR":
+      case ActorTypeSymbols.veerRightActor:
         actor = new VeerActor(
           VeerDirection.clockwise,
           new Position(parseInt(components[1]), parseInt(components[2])),
